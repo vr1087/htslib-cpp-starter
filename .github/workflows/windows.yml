@@ -33,14 +33,32 @@ jobs:
 
       - name: Install zlib via vcpkg
         run: .\vcpkg\vcpkg install zlib
+          
+      - name: Configure & build library
+        run: cmake ^
+          -DCMAKE_TOOLCHAIN_FILE=vcpkg\scripts\buildsystems\vcpkg.cmake ^
+          -DCMAKE_INSTALL_PREFIX=local ^
+          -S . -B build ^
+          -G "Visual Studio 17 2022" -A x64 ^
+          -DCMAKE_BUILD_TYPE=Release && ^
+          cmake --build build --config Release --target INSTALL
 
-      - name: configure
-        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1 -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+      - name: Configure & build tests
+        run: cmake ^
+          -DCMAKE_TOOLCHAIN_FILE=vcpkg\scripts\buildsystems\vcpkg.cmake ^
+          -DCMAKE_PREFIX_PATH=local ^
+          -DTEST_INSTALLED_VERSION=1 ^
+          -S test -B build-test ^
+          -G "Visual Studio 17 2022" -A x64 && ^
+          cmake --build build-test --config Debug
 
-      - name: build
-        run: cmake --build build --config Debug -j4
-
-      - name: test
+      - name: Run tests
         run: |
-          cd build
+          cd build-test
           ctest --build-config Debug
+
+      - name: Cleanup
+        run: |
+          rd /s /q build
+          rd /s /q build-test
+          rd /s /q local
