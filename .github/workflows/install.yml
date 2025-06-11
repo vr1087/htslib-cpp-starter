@@ -34,8 +34,7 @@ jobs:
       - name: build and install library
         run: |
           cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-          sudo cmake --build build --target install
-          sudo rm -rf build
+          sudo cmake --build build --target install          
 
       - name: configure
         run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
@@ -47,3 +46,8 @@ jobs:
         run: |
           cd build
           ctest --build-config Debug
+
+      - name: cleanup
+        run: |
+          sudo rm -rf build
+          
