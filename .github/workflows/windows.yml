@@ -31,19 +31,8 @@ jobs:
           git clone https://github.com/microsoft/vcpkg.git vcpkg
           .\vcpkg\bootstrap-vcpkg.bat
 
-      - name: Install zlib via vcpkg
-        run: .\vcpkg\vcpkg install zlib
-
-      - name: Setup MSYS2 + Autotools
-        uses: msys2/setup-msys2@v2
-        with:
-          update: true
-          install: |
-            msys/autoconf
-            msys/automake
-            msys/libtool
-            msys/m4
-            msys/make
+      - name: Install zlib, htslib via vcpkg
+        run: .\vcpkg\vcpkg install zlib htslib
 
       - name: Configure & build library
         run: |
