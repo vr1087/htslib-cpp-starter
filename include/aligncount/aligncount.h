@@ -4,28 +4,25 @@
 
 namespace aligncount {
 
-  /**  Language codes to be used with the Aligncount class */
-  enum class LanguageCode { EN, DE, ES, FR };
-
   /**
-   * @brief A class for saying hello in multiple languages
+   * @brief A class for counting alignment records
    */
   class Aligncount {
-    std::string name;
+
+    std::string m_alignment_file;
 
   public:
     /**
      * @brief Creates a new aligncount
-     * @param name the name to greet
+     * @param alignment file to read from
      */
-    Aligncount(std::string name);
+    Aligncount(std::string file_path);
 
     /**
-     * @brief Creates a localized string containing the greeting
-     * @param lang the language to greet in
-     * @return a string containing the greeting
+     * @brief Returns the number of alignment records parsed by htslib
+     * @return an int representing the number of SAM records
      */
-    std::string greet(LanguageCode lang = LanguageCode::EN) const;
+    [[nodiscard]] uint64_t count_records() const;
   };
 
 }  // namespace aligncount

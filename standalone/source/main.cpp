@@ -4,50 +4,47 @@
 #include <cxxopts.hpp>
 #include <iostream>
 #include <string>
-#include <unordered_map>
+#include <filesystem>
 
 auto main(int argc, char** argv) -> int {
-  const std::unordered_map<std::string, aligncount::LanguageCode> languages{
-      {"en", aligncount::LanguageCode::EN},
-      {"de", aligncount::LanguageCode::DE},
-      {"es", aligncount::LanguageCode::ES},
-      {"fr", aligncount::LanguageCode::FR},
-  };
 
-  cxxopts::Options options(*argv, "A program to welcome the world!");
+  cxxopts::Options options(*argv, "A program to count alignment records");
 
-  std::string language;
-  std::string name;
+  std::string alignments;
 
   // clang-format off
   options.add_options()
     ("h,help", "Show help")
     ("v,version", "Print the current version number")
-    ("n,name", "Name to greet", cxxopts::value(name)->default_value("World"))
-    ("l,lang", "Language code to use", cxxopts::value(language)->default_value("en"))
+    ("a,alignments", "Path to SAM/BAM/CRAM file.", cxxopts::value(alignments)->default_value(""))
   ;
   // clang-format on
 
   auto result = options.parse(argc, argv);
 
   if (result["help"].as<bool>()) {
-    std::cout << options.help() << std::endl;
+    std::cout << options.help() << "\n";
     return 0;
   }
 
   if (result["version"].as<bool>()) {
-    std::cout << "Aligncount, version " << ALIGNCOUNT_VERSION << std::endl;
+    std::cout << "Aligncount, version " << ALIGNCOUNT_VERSION << "\n";
     return 0;
   }
 
-  auto langIt = languages.find(language);
-  if (langIt == languages.end()) {
-    std::cerr << "unknown language code: " << language << std::endl;
+  if (alignments.empty()) {
+    std::cout << "alignments file not specified!" << "\n";
     return 1;
   }
 
-  aligncount::Aligncount aligncount(name);
-  std::cout << aligncount.greet(langIt->second) << std::endl;
+  std::filesystem::path p = alignments;
+  if (!exists(p) || !is_regular_file(p)) {
+    std::cout << "File " << p << " does not exist!" << "\n";
+    return 1;
+  }
+
+  aligncount::Aligncount aligncount(alignments);
+  std::cout << aligncount.count_records()  << "\n";
 
   return 0;
 }
