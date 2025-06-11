@@ -11,6 +11,23 @@
 
 # ModernCppStarter
 
+> **About this fork**  
+> This repository is a slim fork of **ModernCppStarter** that adds
+> first-class **HTSlib** support and swaps the placeholder program for a real,
+> HTS-aware demo. Use this repo fork as a template if you need a zero-friction
+> starting point for **C++ bioinformatics tools that use HTSlib**.
+
+### What’s different from the original template?
+
+| Change                                                                                                                                                                                                                                                     | Why it matters                                                                       |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **HTSlib integrated** via CMake `find_package(HTSlib)` and ready-made targets. Integration pattern adapted from Yang Li’s blog post [*Building C++ Development in Bioinformatics*](https://yangli.hashnode.dev/building-cpp-development-in-bioinformatics). | Start writing HTSlib-aware code immediately—no extra build glue.                     |
+| Placeholder “Greeter” replaced by **`Aligncount`** – a tiny tool that counts alignemnt records.                                                                                                                                                         | Proves the toolchain really links, runs, and unit-tests with HTSlib present.         |
+| **Minimum CMake version raised** to **3.18+**.                                                                                                                                                                                                             | Ensures wider support for current compilers without locking you to the bleeding edge. |
+| Default **C++ standard set to C++20** (was C++17).                                                                                                                                                                                                         | Lets you use concepts, and other C++20 features.                                     |                                     |
+
+---
+
 Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code, even more so for modern C++ projects with tests, executables and continuous integration.
 This template is the result of learnings from many previous projects and should help reduce the work required to setup up a modern C++ project.
 
