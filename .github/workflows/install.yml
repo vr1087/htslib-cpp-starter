@@ -35,7 +35,7 @@ jobs:
         run: |
           cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
           sudo cmake --build build --target install
-          rm -rf build
+          sudo rm -rf build
 
       - name: configure
         run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
