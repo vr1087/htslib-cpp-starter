@@ -13,7 +13,7 @@ TEST_CASE("Aligncount counts two records in a SAM file") {
   // ── 1. create the file ────────────────────────────────────────────
   {
     std::ofstream sam(sam_path);
-    REQUIRE(sam);   // abort test if file couldn’t be opened
+    REQUIRE(sam);  // abort test if file couldn’t be opened
 
     sam << "@HD\tVN:1.6\tSO:coordinate\n"
         << "@SQ\tSN:chr1\tLN:1000\n"
