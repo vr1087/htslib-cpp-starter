@@ -14,17 +14,18 @@
 > **About this fork**  
 > This repository is a slim fork of **ModernCppStarter** that adds
 > first-class **HTSlib** support and swaps the placeholder program for a real,
-> HTS-aware demo. Use this repo fork as a template if you need a zero-friction
+> HTSlib-aware demo. Use this repo fork as a template if you need a zero-friction
 > starting point for **C++ bioinformatics tools that use HTSlib**.
 
 ### What’s different from the original template?
 
-| Change                                                                                                                                                                                                                                                     | Why it matters                                                                       |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **HTSlib integrated** via CMake `find_package(HTSlib)` and ready-made targets. Integration pattern adapted from Yang Li’s blog post [*Building C++ Development in Bioinformatics*](https://yangli.hashnode.dev/building-cpp-development-in-bioinformatics). | Start writing HTSlib-aware code immediately—no extra build glue.                     |
-| Placeholder “Greeter” replaced by **`Aligncount`** – a tiny tool that counts alignemnt records.                                                                                                                                                         | Proves the toolchain really links, runs, and unit-tests with HTSlib present.         |
-| **Minimum CMake version raised** to **3.18+**.                                                                                                                                                                                                             | Ensures wider support for current compilers without locking you to the bleeding edge. |
-| Default **C++ standard set to C++20** (was C++17).                                                                                                                                                                                                         | Lets you use concepts, and other C++20 features.                                     |                                     |
+| Change                                                                                                                                                                                                                                                    | Why it matters                                                                        |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **HTSlib integrated** via CMake `find_package(HTSlib)` and ready-made targets. Integration pattern adapted from Yang Li’s blog post [*Building C++ Development in Bioinformatics*](https://yangli.hashnode.dev/building-cpp-development-in-bioinformatics). | Start writing HTSlib-aware code immediately—no extra build glue.                      |
+| Placeholder “Greeter” replaced by **`Aligncount`** – a tiny tool that counts alignemnt records.                                                                                                                                                           | Proves the toolchain really links, runs, and unit-tests with HTSlib present.          |
+| **Minimum CMake version raised** to **3.18+**.                                                                                                                                                                                                            | Ensures wider support for current compilers without locking you to the bleeding edge. |
+| Default **C++ standard set to C++20** (was C++17).                                                                                                                                                                                                        | Lets you use concepts, and other C++20 features.                                      |
+| **Updated GitHub workflows** to support HTSlib.                                                                                                                                                                                                | Windows workflow is now disabled.                                                     |
 
 ---
 
