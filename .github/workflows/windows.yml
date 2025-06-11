@@ -43,7 +43,7 @@ jobs:
             msys/automake
             msys/libtool
             msys/m4
-            msys/make   # HTSlib’s build uses `make`
+            msys/make
 
       - name: Configure & build library
         run: |
