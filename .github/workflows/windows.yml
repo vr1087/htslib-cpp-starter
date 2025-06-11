@@ -33,7 +33,18 @@ jobs:
 
       - name: Install zlib via vcpkg
         run: .\vcpkg\vcpkg install zlib
-          
+
+      - name: Setup MSYS2 + Autotools
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: |
+            msys/autoconf
+            msys/automake
+            msys/libtool
+            msys/m4
+            msys/make   # HTSlib’s build uses `make`
+
       - name: Configure & build library
         run: |
           cmake -DCMAKE_TOOLCHAIN_FILE="vcpkg\scripts\buildsystems\vcpkg.cmake" -DCMAKE_INSTALL_PREFIX="local" -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
