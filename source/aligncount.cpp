@@ -1,11 +1,11 @@
+#include <aligncount/aligncount.h>
 #include <fmt/format.h>
-#include <greeter/greeter.h>
 
-using namespace greeter;
+using namespace aligncount;
 
-Greeter::Greeter(std::string _name) : name(std::move(_name)) {}
+Aligncount::Aligncount(std::string _name) : name(std::move(_name)) {}
 
-std::string Greeter::greet(LanguageCode lang) const {
+std::string Aligncount::greet(LanguageCode lang) const {
   switch (lang) {
     default:
     case LanguageCode::EN:
